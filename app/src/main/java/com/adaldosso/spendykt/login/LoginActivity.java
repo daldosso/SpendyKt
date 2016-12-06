@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -44,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static com.adaldosso.spendykt.R.id.email;
 
 /**
  * A login screen that offers login via email/password.
@@ -62,6 +64,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
+    private static final String SPENDY_PREFERENCES_NAME = "SpendyPreferences";
+    public static final String SESSION_ID_KEY = "sessionID";
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -79,8 +85,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        checkPreferences();
+
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (AutoCompleteTextView) findViewById(email);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -107,6 +116,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
 
         requestQueue = Volley.newRequestQueue(this);
+    }
+
+    private void checkPreferences() {
+        SharedPreferences prefs = getSharedPreferences(SPENDY_PREFERENCES_NAME, MODE_PRIVATE);
+        String sessionID = prefs.getString(SESSION_ID_KEY, null);
+        if (sessionID != null) {
+            doLogin(sessionID);
+        }
+    }
+
+    private void saveSessionID(JSONObject response) {
+        SharedPreferences.Editor editor = getSharedPreferences(SPENDY_PREFERENCES_NAME, MODE_PRIVATE).edit();
+        try {
+            editor.putString(SESSION_ID_KEY, response.getString(SESSION_ID_KEY));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        editor.apply();
     }
 
     private void populateAutoComplete() {
@@ -218,21 +245,36 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } catch (JSONException e) {
             mEmailView.setError(getString(R.string.error_invalid_email));
         }
+        doRemoteLogin(jsonRequest);
+    }
+
+    private void doLogin(String sessionID) {
+        JSONObject jsonRequest = new JSONObject();
+        try {
+            jsonRequest.accumulate("sessionID", sessionID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        doRemoteLogin(jsonRequest);
+    }
+
+    private void doRemoteLogin(JSONObject jsonRequest) {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-            (Request.Method.POST, getString(R.string.login_url), jsonRequest, new Response.Listener<JSONObject>() {
+                (Request.Method.POST, getString(R.string.login_url), jsonRequest, new Response.Listener<JSONObject>() {
 
-                @Override
-                public void onResponse(JSONObject response) {
-                    gotoMain();
-                }
-            }, new Response.ErrorListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        saveSessionID(response);
+                        gotoMain();
+                    }
+                }, new Response.ErrorListener() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // TODO Auto-generated method stub
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
 
-                }
-            });
+                    }
+                });
         requestQueue.add(jsObjRequest);
     }
 
