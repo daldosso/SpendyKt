@@ -17,5 +17,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="login_url">https://spendynode.herokuapp.com/spendykt</string>
+    <string name="login_url">https://spendynode.herokuapp.com/spendykt-login</string>
 </resources>

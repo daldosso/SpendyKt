@@ -37,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -201,13 +202,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             //mAuthTask = new UserLoginTask(email, password);
             //mAuthTask.execute((Void) null);
-            doLogin();
+            doLogin(email, password);
         }
     }
 
-    private void doLogin() {
+    private void doLogin(String email, String password) {
+        JSONObject jsonRequest = new JSONObject();
+        try {
+            jsonRequest.accumulate("email", email);
+        } catch (JSONException e) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+        }
+        try {
+            jsonRequest.accumulate("password", password);
+        } catch (JSONException e) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+        }
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-            (Request.Method.GET, getString(R.string.login_url), null, new Response.Listener<JSONObject>() {
+            (Request.Method.POST, getString(R.string.login_url), jsonRequest, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
