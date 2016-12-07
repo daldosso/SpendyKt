@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private fun addDrawer() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        supportActionBar!!.setTitle(R.string.drawer_item_custom_container_drawer)
+        supportActionBar!!.setTitle(R.string.app_name)
 
         val item1 = PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_item_home)
         val item2 = SecondaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_settings)

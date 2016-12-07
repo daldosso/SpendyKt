@@ -19,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        requestQueue = Volley.newRequestQueue(this);
         checkPreferences();
 
         // Set up the login form.
@@ -114,8 +115,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-
-        requestQueue = Volley.newRequestQueue(this);
     }
 
     private void checkPreferences() {
@@ -271,8 +270,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-
+                        Log.e("login", error.getMessage());
                     }
                 });
         requestQueue.add(jsObjRequest);
