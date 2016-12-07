@@ -16,4 +16,44 @@
         android:id="@+id/toolbar"
         android:layout_alignParentStart="true"
         app:contentInsetStart="0dp" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/fab"
+        android:layout_toEndOf="@+id/fab"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="127dp" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/ic_add_white_24dp"
+        app:fab_colorNormal="#DA4336"
+        app:fab_colorPressed="#E75043"
+        app:fab_colorRipple="#99FFFFFF"
+        app:fab_showShadow="true"
+        app:fab_shadowColor="#66000000"
+        app:fab_shadowRadius="4dp"
+        app:fab_shadowXOffset="1dp"
+        app:fab_shadowYOffset="3dp"
+        app:fab_size="normal"
+        app:fab_showAnimation="@anim/fab_scale_up"
+        app:fab_hideAnimation="@anim/fab_scale_down"
+        app:fab_label=""
+        app:fab_progress_color="#FF009688"
+        app:fab_progress_backgroundColor="#4D000000"
+        app:fab_progress_indeterminate="false"
+        app:fab_progress_max="100"
+        app:fab_progress="0"
+        app:fab_progress_showBackground="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        app:elevation="0dp" />
+
 </RelativeLayout>
