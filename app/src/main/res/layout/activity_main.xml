@@ -18,7 +18,7 @@
         app:contentInsetStart="0dp" />
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/expenses_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/fab"
@@ -36,11 +36,10 @@
         app:fab_colorNormal="#DA4336"
         app:fab_colorPressed="#E75043"
         app:fab_colorRipple="#99FFFFFF"
-        app:fab_showShadow="true"
         app:fab_shadowColor="#66000000"
-        app:fab_shadowRadius="4dp"
+        app:fab_shadowRadius="1dp"
         app:fab_shadowXOffset="1dp"
-        app:fab_shadowYOffset="3dp"
+        app:fab_shadowYOffset="1dp"
         app:fab_size="normal"
         app:fab_showAnimation="@anim/fab_scale_up"
         app:fab_hideAnimation="@anim/fab_scale_down"
@@ -50,10 +49,11 @@
         app:fab_progress_indeterminate="false"
         app:fab_progress_max="100"
         app:fab_progress="0"
-        app:fab_progress_showBackground="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="15dp"
-        app:elevation="0dp" />
+        app:elevation="0dp"
+        app:fab_showShadow="false"
+        app:fab_progress_showBackground="false" />
 
 </RelativeLayout>

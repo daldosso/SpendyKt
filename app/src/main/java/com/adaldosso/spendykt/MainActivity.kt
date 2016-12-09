@@ -3,10 +3,13 @@ package com.adaldosso.spendykt
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.widget.AbsListView
+import com.adaldosso.spendykt.utils.ExpenseAdapter
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
+import org.json.JSONArray
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +17,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         addDrawer()
+        populateList()
+    }
+
+    private fun populateList() {
+        var listView = findViewById(R.id.expenses_list) as AbsListView
+        var expenseAdapter = ExpenseAdapter(this, getLastExpenses())
+        listView.setAdapter(expenseAdapter)
+    }
+
+    private fun getLastExpenses(): JSONArray {
+        return JSONArray()
     }
 
     private fun addDrawer() {

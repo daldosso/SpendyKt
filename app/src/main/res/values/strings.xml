@@ -18,4 +18,8 @@
         completions."
     </string>
     <string name="login_url">https://spendynode.herokuapp.com/spendykt-login</string>
+    <string name="date">Data</string>
+    <string name="amount">Importo</string>
+    <string name="category">Categoria</string>
+    <string name="note">Note</string>
 </resources>
