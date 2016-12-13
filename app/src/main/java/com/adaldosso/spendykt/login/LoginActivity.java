@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             "foo@example.com:hello", "bar@example.com:world"
     };
 
-    private static final String SPENDY_PREFERENCES_NAME = "SpendyPreferences";
+    public static final String SPENDY_PREFERENCES_NAME = "SpendyPreferences";
     public static final String SESSION_ID_KEY = "sessionID";
 
     /**
@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         requestQueue = Volley.newRequestQueue(this);
-        checkPreferences();
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(email);
@@ -115,14 +114,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-    }
-
-    private void checkPreferences() {
-        SharedPreferences prefs = getSharedPreferences(SPENDY_PREFERENCES_NAME, MODE_PRIVATE);
-        String sessionID = prefs.getString(SESSION_ID_KEY, null);
-        if (sessionID != null) {
-            doLogin(sessionID);
-        }
     }
 
     private void saveSessionID(JSONObject response) {
@@ -243,16 +234,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             jsonRequest.accumulate("password", password);
         } catch (JSONException e) {
             mEmailView.setError(getString(R.string.error_invalid_email));
-        }
-        doRemoteLogin(jsonRequest);
-    }
-
-    private void doLogin(String sessionID) {
-        JSONObject jsonRequest = new JSONObject();
-        try {
-            jsonRequest.accumulate("sessionID", sessionID);
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
         doRemoteLogin(jsonRequest);
     }
