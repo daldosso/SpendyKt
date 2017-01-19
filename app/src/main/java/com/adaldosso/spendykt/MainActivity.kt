@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.AbsListView
+import com.adaldosso.spendykt.fragments.ExpensesListFragment
 import com.adaldosso.spendykt.utils.ExpenseAdapter
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
@@ -17,7 +18,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         addDrawer()
-        populateList()
+        //populateList()
+        loadExpensesListFragment()
+    }
+
+    private fun loadExpensesListFragment() {
+        val transaction = fragmentManager.beginTransaction()
+        val expensesListFragment = ExpensesListFragment()
+        expensesListFragment.fillList()
+//        expensesListFragment.setJsonArray(getLastExpenses())
+        transaction.replace(R.id.activity_main, expensesListFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun populateList() {
@@ -28,6 +40,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun getLastExpenses(): JSONArray {
         return JSONArray()
+/*
+        return JSONArray("[" +
+            "{'date': '01/01/2017', 'amount': 150.43}" +
+            "{'date': '04/01/2017', 'amount': 50.00}" +
+            "{'date': '06/01/2017', 'amount': 10.37}" +
+        "]")
+*/
     }
 
     private fun addDrawer() {
@@ -50,4 +69,20 @@ class MainActivity : AppCompatActivity() {
                 .withOnDrawerItemClickListener { view, position, drawerItem -> true }
                 .build()
     }
+
+    fun loadMonthlyOutgoings(year: Int, month: Int) {
+/*
+        val params = ArrayList<NameValuePair>(2)
+        params.add(BasicNameValuePair(Utils.MONTH, month.toString()))
+        params.add(BasicNameValuePair(Utils.YEAR, year.toString()))
+        val rows = getRows(Utils.MONTHLY_OUTGOINGS_URL, params)
+*/
+        val transaction = fragmentManager.beginTransaction()
+//        val monthlyOutgoingFragment = MonthlyOutgoingFragment()
+//        monthlyOutgoingFragment.setJsonArray(rows)
+//        transaction.replace(R.id.activity_main, monthlyOutgoingFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
 }
