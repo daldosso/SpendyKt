@@ -21,10 +21,15 @@
         android:id="@+id/expenses_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fab"
-        android:layout_toEndOf="@+id/fab"
+        android:layout_below="@+id/toolbar"
         android:layout_marginStart="92dp"
         android:layout_marginTop="127dp" />
+
+    <FrameLayout
+        android:id="@+id/expenses_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -55,5 +60,8 @@
         app:elevation="0dp"
         app:fab_showShadow="false"
         app:fab_progress_showBackground="false" />
+
+
+    </FrameLayout>
 
 </RelativeLayout>

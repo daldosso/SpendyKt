@@ -46,9 +46,9 @@ public class ExpensesListFragment extends Fragment implements AbsListView.OnItem
                     String year = "";
                     String amount = "";
                     try {
-                        month = jsonData.getString("mese");
-                        year = jsonData.getString("anno");
-                        amount = jsonData.getString("importo");
+                        month = jsonData.getString("date");
+                        year = jsonData.getString("date");
+                        amount = jsonData.getString("amount");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -86,8 +86,8 @@ public class ExpensesListFragment extends Fragment implements AbsListView.OnItem
         JSONArray jsonArray = null;
         try {
             jsonArray = new JSONArray("[" +
-                    "{'date': '01/01/2017', 'amount': 150.43}" +
-                    "{'date': '04/01/2017', 'amount': 50.00}" +
+                    "{'date': '01/01/2017', 'amount': 150.43}," +
+                    "{'date': '04/01/2017', 'amount': 50.00}," +
                     "{'date': '06/01/2017', 'amount': 10.37}" +
                     "]");
         } catch (JSONException e) {

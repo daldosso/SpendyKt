@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val expensesListFragment = ExpensesListFragment()
         expensesListFragment.fillList()
 //        expensesListFragment.setJsonArray(getLastExpenses())
-        transaction.replace(R.id.activity_main, expensesListFragment)
+        transaction.replace(R.id.expenses_list_container, expensesListFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
