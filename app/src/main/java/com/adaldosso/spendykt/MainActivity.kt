@@ -6,11 +6,14 @@ import android.support.v7.widget.Toolbar
 import android.widget.AbsListView
 import com.adaldosso.spendykt.fragments.ExpensesListFragment
 import com.adaldosso.spendykt.utils.ExpenseAdapter
+import com.adaldosso.spendykt.utils.NameValuePair
+import com.adaldosso.spendykt.utils.SpendyUtils
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import org.json.JSONArray
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,8 +36,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun populateList() {
-        var listView = findViewById(R.id.expenses_list) as AbsListView
-        var expenseAdapter = ExpenseAdapter(this, getLastExpenses())
+        val listView = findViewById(R.id.expenses_list) as AbsListView
+        val expenseAdapter = ExpenseAdapter(this, getLastExpenses())
         listView.setAdapter(expenseAdapter)
     }
 
@@ -71,12 +74,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadMonthlyOutgoings(year: Int, month: Int) {
-/*
         val params = ArrayList<NameValuePair>(2)
-        params.add(BasicNameValuePair(Utils.MONTH, month.toString()))
-        params.add(BasicNameValuePair(Utils.YEAR, year.toString()))
-        val rows = getRows(Utils.MONTHLY_OUTGOINGS_URL, params)
-*/
+        params.add(NameValuePair(SpendyUtils.MONTH, month.toString()))
+        params.add(NameValuePair(SpendyUtils.YEAR, year.toString()))
+        val rows = SpendyUtils.getRows(SpendyUtils.MONTHLY_OUTGOINGS_URL, params)
         val transaction = fragmentManager.beginTransaction()
 //        val monthlyOutgoingFragment = MonthlyOutgoingFragment()
 //        monthlyOutgoingFragment.setJsonArray(rows)

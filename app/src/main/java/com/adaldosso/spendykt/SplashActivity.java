@@ -26,8 +26,7 @@ public class SplashActivity extends Activity {
         String sessionID = prefs.getString(SESSION_ID_KEY, null);
         if (sessionID != null) {
             doLogin();
-        }
-        else {
+        } else {
             doMain();
         }
     }
