@@ -13,20 +13,12 @@ import static com.adaldosso.spendykt.login.LoginActivity.SPENDY_PREFERENCES_NAME
 
 public class SplashActivity extends Activity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                start();
-            }
-        }, SPLASH_DISPLAY_LENGTH);
-
+        int SPLASH_DISPLAY_LENGTH = 1000;
+        new Handler().postDelayed(this::start, SPLASH_DISPLAY_LENGTH);
     }
 
     private void start() {
