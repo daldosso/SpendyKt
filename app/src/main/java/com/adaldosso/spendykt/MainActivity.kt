@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         val params = ArrayList<NameValuePair>(2)
         params.add(NameValuePair(SpendyUtils.MONTH, month.toString()))
         params.add(NameValuePair(SpendyUtils.YEAR, year.toString()))
-        val rows = SpendyUtils.getRows(SpendyUtils.MONTHLY_OUTGOINGS_URL, params)
+//        SpendyUtils.getRows(SpendyUtils.MONTHLY_OUTGOINGS_URL, params)
         val transaction = fragmentManager.beginTransaction()
 //        val monthlyOutgoingFragment = MonthlyOutgoingFragment()
 //        monthlyOutgoingFragment.setJsonArray(rows)

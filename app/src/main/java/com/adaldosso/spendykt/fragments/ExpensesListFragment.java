@@ -12,10 +12,17 @@ import android.widget.TextView;
 import com.adaldosso.spendykt.MainActivity;
 import com.adaldosso.spendykt.R;
 import com.adaldosso.spendykt.utils.JSONAdapter;
+import com.adaldosso.spendykt.utils.NameValuePair;
+import com.adaldosso.spendykt.utils.SpendyUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExpensesListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
@@ -25,13 +32,12 @@ public class ExpensesListFragment extends Fragment implements AbsListView.OnItem
 
     public void setJsonArray(JSONArray jsonArray) {
         this.jsonArray = jsonArray;
+        setAdapter();
+        this.jsonAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private void setAdapter() {
         jsonAdapter = new JSONAdapter(getActivity(), jsonArray) {
-
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 if (convertView == null) {
@@ -59,6 +65,12 @@ public class ExpensesListFragment extends Fragment implements AbsListView.OnItem
                 return convertView;
             }
         };
+        listView.setAdapter(jsonAdapter);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -66,7 +78,6 @@ public class ExpensesListFragment extends Fragment implements AbsListView.OnItem
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expenses_list, container, false);
         listView = (AbsListView) view.findViewById(android.R.id.list);
-        listView.setAdapter(jsonAdapter);
         listView.setOnItemClickListener(this);
         return view;
     }
@@ -83,17 +94,20 @@ public class ExpensesListFragment extends Fragment implements AbsListView.OnItem
     }
 
     public void fillList() {
-        JSONArray jsonArray = null;
-        try {
-            jsonArray = new JSONArray("[" +
-                    "{'date': '01/01/2017', 'amount': 150.43}," +
-                    "{'date': '04/01/2017', 'amount': 50.00}," +
-                    "{'date': '06/01/2017', 'amount': 10.37}" +
-                    "]");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        setJsonArray(jsonArray);
-
+        List<NameValuePair> params = new ArrayList<>(2);
+        params.add(new NameValuePair(SpendyUtils.MONTH, ""));
+        params.add(new NameValuePair(SpendyUtils.YEAR, ""));
+        SpendyUtils.getRows(SpendyUtils.MONTHLY_OUTGOINGS_URL, params, expenses -> {
+            Gson gson = new Gson();
+            JsonArray expensesArray = gson.toJsonTree(expenses).getAsJsonArray();
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = new JSONArray(expensesArray.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            setJsonArray(jsonArray);
+            return null;
+        });
     }
 }
