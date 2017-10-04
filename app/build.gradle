@@ -43,6 +43,7 @@ dependencies {
     compile 'com.github.clans:fab:1.6.4'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'net.danlew:android.joda:2.9.9'
 }
 repositories {
     mavenCentral()

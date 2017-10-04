@@ -28,7 +28,7 @@ public class SpendyUtils {
     private static final String CLASS_TAG = SpendyUtils.class.getSimpleName();
     public static final String BASE_URL = "https://spendynode.herokuapp.com/";
 
-    public static void getRows(@NotNull String url, @NotNull List<NameValuePair> params, Function<List<Expense>, Object> onResponse) {
+    public static void getRows(@NotNull String url, @NotNull List<NameValuePair> params, Function<List<Expense>, Void> onResponse) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

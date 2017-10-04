@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.AbsListView
 import com.adaldosso.spendykt.fragments.ExpensesListFragment
+import com.adaldosso.spendykt.fragments.MonthlyListFragment
 import com.adaldosso.spendykt.utils.ExpenseAdapter
 import com.adaldosso.spendykt.utils.NameValuePair
 import com.adaldosso.spendykt.utils.SpendyUtils
@@ -43,13 +44,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun getLastExpenses(): JSONArray {
         return JSONArray()
-/*
-        return JSONArray("[" +
-            "{'date': '01/01/2017', 'amount': 150.43}" +
-            "{'date': '04/01/2017', 'amount': 50.00}" +
-            "{'date': '06/01/2017', 'amount': 10.37}" +
-        "]")
-*/
     }
 
     private fun addDrawer() {
@@ -73,15 +67,14 @@ class MainActivity : AppCompatActivity() {
                 .build()
     }
 
-    fun loadMonthlyOutgoings(year: Int, month: Int) {
+    fun loadMonthlyOutgoings(year: String, month: String) {
         val params = ArrayList<NameValuePair>(2)
-        params.add(NameValuePair(SpendyUtils.MONTH, month.toString()))
-        params.add(NameValuePair(SpendyUtils.YEAR, year.toString()))
-//        SpendyUtils.getRows(SpendyUtils.MONTHLY_OUTGOINGS_URL, params)
+        params.add(NameValuePair(SpendyUtils.MONTH, month))
+        params.add(NameValuePair(SpendyUtils.YEAR, year))
         val transaction = fragmentManager.beginTransaction()
-//        val monthlyOutgoingFragment = MonthlyOutgoingFragment()
-//        monthlyOutgoingFragment.setJsonArray(rows)
-//        transaction.replace(R.id.activity_main, monthlyOutgoingFragment)
+        val monthlyOutgoingFragment = MonthlyListFragment()
+        monthlyOutgoingFragment.fillList()
+        transaction.replace(R.id.activity_main, monthlyOutgoingFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
