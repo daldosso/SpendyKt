@@ -3,10 +3,8 @@ package com.adaldosso.spendykt
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.widget.AbsListView
 import com.adaldosso.spendykt.fragments.ExpensesListFragment
 import com.adaldosso.spendykt.fragments.MonthlyListFragment
-import com.adaldosso.spendykt.utils.ExpenseAdapter
 import com.adaldosso.spendykt.utils.NameValuePair
 import com.adaldosso.spendykt.utils.SpendyUtils
 import com.mikepenz.materialdrawer.DrawerBuilder
@@ -22,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         addDrawer()
-        //populateList()
         loadExpensesListFragment()
     }
 
@@ -30,16 +27,9 @@ class MainActivity : AppCompatActivity() {
         val transaction = fragmentManager.beginTransaction()
         val expensesListFragment = ExpensesListFragment()
         expensesListFragment.fillList()
-//        expensesListFragment.setJsonArray(getLastExpenses())
         transaction.replace(R.id.expenses_list_container, expensesListFragment)
         transaction.addToBackStack(null)
         transaction.commit()
-    }
-
-    private fun populateList() {
-        val listView = findViewById(R.id.expenses_list) as AbsListView
-        val expenseAdapter = ExpenseAdapter(this, getLastExpenses())
-        listView.setAdapter(expenseAdapter)
     }
 
     private fun getLastExpenses(): JSONArray {
@@ -74,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         val transaction = fragmentManager.beginTransaction()
         val monthlyOutgoingFragment = MonthlyListFragment()
         monthlyOutgoingFragment.fillList()
-        transaction.replace(R.id.activity_main, monthlyOutgoingFragment)
+        transaction.replace(R.id.expenses_list_container, monthlyOutgoingFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

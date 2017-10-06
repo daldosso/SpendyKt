@@ -17,14 +17,6 @@
         android:layout_alignParentStart="true"
         app:contentInsetStart="0dp" />
 
-    <ListView
-        android:id="@+id/expenses_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="127dp" />
-
     <FrameLayout
         android:id="@+id/expenses_list_container"
         android:layout_width="match_parent"
