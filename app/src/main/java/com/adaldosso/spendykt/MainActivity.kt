@@ -13,16 +13,17 @@ class MainActivity : SpendyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadExpensesListFragment()
+        loadStartList()
     }
 
-    private fun loadExpensesListFragment() {
-        val transaction = fragmentManager.beginTransaction()
+    private fun loadStartList() {
         val expensesListFragment = ExpensesListFragment()
         expensesListFragment.fillList()
-        transaction.replace(R.id.expenses_list_container, expensesListFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        fragmentManager
+            .beginTransaction()
+            .replace(R.id.expenses_list_container, expensesListFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     fun loadMonthlyOutgoings(year: String, month: String) {
@@ -31,9 +32,10 @@ class MainActivity : SpendyActivity() {
         params.add(NameValuePair(SpendyUtils.YEAR, year))
         val monthlyOutgoingFragment = MonthlyListFragment()
         monthlyOutgoingFragment.fillList()
-        fragmentManager.beginTransaction()
-            .setCustomAnimations(R.animator.slide_left_in, R.animator.slide_right_out, 0, 0)
-            .add(R.id.expenses_list_container, monthlyOutgoingFragment)
+        fragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.animator.slide_left_in, R.animator.slide_left_out, R.animator.slide_left_in, R.animator.slide_right_out)
+            .replace(R.id.expenses_list_container, monthlyOutgoingFragment)
             .addToBackStack(null)
             .commit()
     }

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.adaldosso.spendykt.MainActivity;
@@ -22,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
 import org.joda.time.DateTime;
+import org.joda.time.YearMonth;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONArray;
@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class SpendyListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
@@ -57,7 +58,7 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 if (convertView == null) {
-                    convertView = getActivity().getLayoutInflater().inflate(R.layout.expense, null);
+                    convertView = getActivity().getLayoutInflater().inflate(getLayoutListItem(), null);
                 }
                 TextView textMonth =(TextView)convertView.findViewById(R.id.month);
                 TextView textYear =(TextView)convertView.findViewById(R.id.year);
@@ -75,8 +76,12 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    textMonth.setText(month);
-                    textYear.setText(year);
+                    if (textMonth != null) {
+                        textMonth.setText(month);
+                    }
+                    if (textYear != null) {
+                        textYear.setText(year);
+                    }
                     textAmount.setText(amount);
                 }
                 return convertView;
@@ -90,11 +95,13 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         return formatter.parseDateTime(date);
     }
 
-    private String extractMonth(String date) {
-        return String.valueOf(convertDate(date).getMonthOfYear());
+    protected String extractMonth(String date) {
+        DateTime dateTime = convertDate(date);
+        YearMonth yearMonth = new YearMonth(dateTime.getYear(), dateTime.getMonthOfYear());
+        return SpendyUtils.capitalize(yearMonth.monthOfYear().getAsText(new Locale("it"))) ;
     }
 
-    private String extractYear(String date) {
+    protected String extractYear(String date) {
         return String.valueOf(convertDate(date).getYear());
     }
 
@@ -106,23 +113,15 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_expenses_list, container, false);
+        View view = inflater.inflate(getLayout(), container, false);
         listView = (AbsListView) view.findViewById(android.R.id.list);
         listView.setOnItemClickListener(this);
         return view;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        JSONObject item = (JSONObject) listView.getItemAtPosition(position);
-        MainActivity activity = (MainActivity) getActivity();
-        try {
-            String date = item.getString("date");
-            activity.loadMonthlyOutgoings(extractYear(date), extractMonth(date));
-        } catch (JSONException e) {
-            Log.e(getTag(), e.getMessage());
-        }
-    }
+    protected abstract int getLayout();
+
+    protected abstract int getLayoutListItem();
 
     public void fillList() {
         List<NameValuePair> params = new ArrayList<>(2);
@@ -151,4 +150,13 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         ((MainActivity) getActivity()).addExpense(view);
     }
 
+    public AbsListView getListView() {
+        return listView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fillList();
+    }
 }
