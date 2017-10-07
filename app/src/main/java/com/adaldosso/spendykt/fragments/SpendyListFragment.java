@@ -2,6 +2,8 @@ package com.adaldosso.spendykt.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +33,18 @@ import java.util.List;
 
 public abstract class SpendyListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
+    private static final String CLASS_TAG = SpendyListFragment.class.getSimpleName();
     private AbsListView listView;
     private JSONAdapter jsonAdapter;
     private JSONArray jsonArray;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(this::fillList);
+    }
 
     public void setJsonArray(JSONArray jsonArray) {
         this.jsonArray = jsonArray;
@@ -129,10 +140,15 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         try {
             jsonArray = new JSONArray(expensesArray.toString());
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(CLASS_TAG, "fillListCallback");
         }
         setJsonArray(jsonArray);
+        swipeRefreshLayout.setRefreshing(false);
         return null;
+    }
+
+    public void addExpense(View view) {
+        ((MainActivity) getActivity()).addExpense(view);
     }
 
 }

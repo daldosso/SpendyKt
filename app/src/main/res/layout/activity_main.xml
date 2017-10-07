@@ -30,7 +30,9 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="30dp"
             app:fab_colorRipple="@color/md_white_1000"
-            android:src="@android:drawable/ic_input_add" />
+            android:src="@android:drawable/ic_input_add"
+            android:onClick="addExpense"
+            />
 
     </FrameLayout>
 
