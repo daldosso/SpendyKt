@@ -1,7 +1,9 @@
 package com.adaldosso.spendykt
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.adaldosso.spendykt.activities.AddExpense
 import com.adaldosso.spendykt.fragments.ExpensesListFragment
 import com.adaldosso.spendykt.fragments.MonthlyListFragment
 import com.adaldosso.spendykt.utils.NameValuePair
@@ -41,7 +43,7 @@ class MainActivity : SpendyActivity() {
     }
 
     fun addExpense(view: View) {
-        showToast("Expense")
+        startActivity(Intent(this, AddExpense::class.java))
     }
 
 }
