@@ -1,16 +1,16 @@
 package com.adaldosso.spendykt.fragments;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 
 import com.adaldosso.spendykt.MainActivity;
 import com.adaldosso.spendykt.R;
+import com.adaldosso.spendykt.api.Expense;
 import com.adaldosso.spendykt.utils.SpendyUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import static com.adaldosso.spendykt.utils.SpendyUtils.extractMonth;
+import static com.adaldosso.spendykt.utils.SpendyUtils.extractYear;
 
 public class ExpensesListFragment extends SpendyListFragment implements AbsListView.OnItemClickListener {
 
@@ -31,14 +31,10 @@ public class ExpensesListFragment extends SpendyListFragment implements AbsListV
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        JSONObject item = (JSONObject) getListView().getItemAtPosition(position);
+        Expense expense = getExpenses().get(position);
         MainActivity activity = (MainActivity) getActivity();
-        try {
-            String date = item.getString("date");
-            activity.loadMonthlyOutgoings(extractYear(date), extractMonth(date));
-        } catch (JSONException e) {
-            Log.e(getTag(), e.getMessage());
-        }
+        String date = expense.getDate();
+        activity.loadMonthlyOutgoings(extractYear(date), extractMonth(date));
     }
 
 }

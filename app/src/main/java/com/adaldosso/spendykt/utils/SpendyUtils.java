@@ -7,8 +7,13 @@ import com.adaldosso.spendykt.api.Expense;
 import com.adaldosso.spendykt.api.SpendyService;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.DateTime;
+import org.joda.time.YearMonth;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 
 import retrofit2.Call;
@@ -49,7 +54,24 @@ public class SpendyUtils {
         });
     }
 
-    public static String capitalize(String text) {
+    private static String capitalize(String text) {
         return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
+
+    private static DateTime convertDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+        return formatter.parseDateTime(date);
+    }
+
+    public static String extractMonth(String date) {
+        DateTime dateTime = convertDate(date);
+        YearMonth yearMonth = new YearMonth(dateTime.getYear(), dateTime.getMonthOfYear());
+        return SpendyUtils.capitalize(yearMonth.monthOfYear().getAsText(new Locale("it"))) ;
+    }
+
+    public static String extractYear(String date) {
+        return String.valueOf(convertDate(date).getYear());
+    }
+
+
 }
