@@ -9,6 +9,9 @@ import com.adaldosso.spendykt.api.Expense;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+
 import static com.adaldosso.spendykt.R.layout.expense;
 
 /**
@@ -20,6 +23,8 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
 
     private final List<Expense> expenses;
     private ViewGroup parent;
+
+    private final PublishSubject<Expense> onClickSubject = PublishSubject.create();
 
     public ExpensesAdapter(List<Expense> expenses, ViewGroup parent) {
         this.expenses = expenses;
@@ -34,8 +39,15 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
 
     @Override
     public void onBindViewHolder(ExpenseHolder holder, int position) {
-        holder.getYear().setText(expenses.get(position).getYear());
-        holder.getMonth().setText(expenses.get(position).getMonth());
+        Expense expense = expenses.get(position);
+        holder.getYear().setText(expense.getYear());
+        holder.getMonth().setText(expense.getMonth());
+
+        holder.itemView.setOnClickListener(v -> onClickSubject.onNext(expense));
+    }
+
+    public Observable<Expense> getPositionClicks(){
+        return onClickSubject;
     }
 
     @Override

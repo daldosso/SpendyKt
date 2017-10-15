@@ -31,9 +31,16 @@
         android:id="@+id/amount"
         android:text="@string/amount"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:layout_alignParentEnd="true"
         android:textSize="@dimen/standard_text"
-        android:layout_marginRight="10dp" />
+        />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>
