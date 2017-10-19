@@ -42,7 +42,6 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
         Expense expense = expenses.get(position);
         holder.getYear().setText(expense.getYear());
         holder.getMonth().setText(expense.getMonth());
-
         holder.itemView.setOnClickListener(v -> onClickSubject.onNext(expense));
     }
 
@@ -60,5 +59,9 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
 
     public List<Expense> getExpenses() {
         return expenses;
+    }
+
+    public PublishSubject<Expense> getOnClickSubject() {
+        return onClickSubject;
     }
 }

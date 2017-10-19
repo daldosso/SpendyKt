@@ -23,6 +23,10 @@ import com.adaldosso.spendykt.utils.SpendyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.functions.Consumer;
+
+import static com.adaldosso.spendykt.utils.SpendyUtils.showMessage;
+
 public abstract class SpendyListFragment extends Fragment implements AbsListView.OnItemClickListener, View.OnClickListener {
 
     private static final String CLASS_TAG = SpendyListFragment.class.getSimpleName();
@@ -33,7 +37,7 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swiperefresh);
+        swipeRefreshLayout = getActivity().findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(this::fillList);
     }
 
@@ -46,7 +50,7 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.expensesList);
+        recyclerView = view.findViewById(R.id.expensesList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
@@ -67,6 +71,8 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
     private Void fillListCallback(List<Expense> expenses) {
         setExpenses(expenses);
         swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
         return null;
     }
 
@@ -76,7 +82,12 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setOnClickListener(this);
         recyclerView.setAdapter(expensesAdapter);
+        expensesAdapter
+            .getOnClickSubject()
+            .subscribe(expense -> onExpenseClick(expense));
     }
+
+    protected void onExpenseClick(Expense expense) {}
 
     public void addExpense(View view) {
         ((MainActivity) getActivity()).addExpense(view);
@@ -94,12 +105,12 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
 
     @Override
     public void onClick(View view) {
-
+        showMessage(getContext(), "onClick");
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+        showMessage(getContext(), "onItemClick");
     }
 
     protected List<Expense> getExpenses() {

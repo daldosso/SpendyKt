@@ -1,6 +1,10 @@
 package com.adaldosso.spendykt.utils;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.adaldosso.spendykt.api.Expense;
@@ -31,7 +35,7 @@ public class SpendyUtils {
     public static final String YEAR = "anno";
     public static final String MONTHLY_OUTGOINGS_URL = "http://www.adaldosso.com/quantospendi/srv/totali-categorie.php";
     private static final String CLASS_TAG = SpendyUtils.class.getSimpleName();
-    public static final String BASE_URL = "https://spendynode.herokuapp.com/";
+    private static final String BASE_URL = "https://spendynode.herokuapp.com/";
 
     public static void getRows(@NotNull String url, @NotNull List<NameValuePair> params, Function<List<Expense>, Void> onResponse) {
         Retrofit retrofit = new Retrofit.Builder()
@@ -74,4 +78,18 @@ public class SpendyUtils {
     }
 
 
+    public static void showMessage(Context context, String message) {
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Dialog_Alert);
+        builder.setTitle("Spendy")
+            .setMessage(message)
+            .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                // continue with delete
+            })
+            .setNegativeButton(android.R.string.no, (dialog, which) -> {
+                // do nothing
+            })
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show();
+    }
 }

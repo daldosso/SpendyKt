@@ -31,7 +31,10 @@ public class ExpensesListFragment extends SpendyListFragment implements AbsListV
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Expense expense = getExpenses().get(position);
+    }
+
+    @Override
+    protected void onExpenseClick(Expense expense) {
         MainActivity activity = (MainActivity) getActivity();
         String date = expense.getDate();
         activity.loadMonthlyOutgoings(extractYear(date), extractMonth(date));

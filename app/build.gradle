@@ -5,10 +5,10 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.adaldosso.spendy"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 20
         versionName "1.2.20"
