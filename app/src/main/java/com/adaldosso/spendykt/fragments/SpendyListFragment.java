@@ -13,26 +13,19 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 
-import com.adaldosso.spendykt.MainActivity;
 import com.adaldosso.spendykt.R;
+import com.adaldosso.spendykt.api.BaseExpense;
 import com.adaldosso.spendykt.api.Expense;
 import com.adaldosso.spendykt.utils.ExpensesAdapter;
-import com.adaldosso.spendykt.utils.NameValuePair;
-import com.adaldosso.spendykt.utils.SpendyUtils;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.functions.Consumer;
 
 import static com.adaldosso.spendykt.utils.SpendyUtils.showMessage;
 
 public abstract class SpendyListFragment extends Fragment implements AbsListView.OnItemClickListener, View.OnClickListener {
 
-    private static final String CLASS_TAG = SpendyListFragment.class.getSimpleName();
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ExpensesAdapter expensesAdapter;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -57,18 +50,9 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
 
     protected abstract int getLayout();
 
-    protected abstract int getLayoutListItem();
+    public abstract void fillList();
 
-    public void fillList() {
-        List<NameValuePair> params = new ArrayList<>(2);
-        params.add(new NameValuePair(SpendyUtils.MONTH, ""));
-        params.add(new NameValuePair(SpendyUtils.YEAR, ""));
-        SpendyUtils.getRows(getBaseUrl(), params, this::fillListCallback);
-    }
-
-    protected abstract String getBaseUrl();
-
-    private Void fillListCallback(List<Expense> expenses) {
+    protected Void fillListCallback(List<? extends BaseExpense> expenses) {
         setExpenses(expenses);
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
@@ -76,26 +60,22 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         return null;
     }
 
-    private void setExpenses(List<Expense> expenses) {
-        expensesAdapter = new ExpensesAdapter(expenses, recyclerView);
+    private void setExpenses(List<? extends BaseExpense> expenses) {
+        ExpensesAdapter expensesAdapter = createExpensesAdapter(expenses, recyclerView);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setOnClickListener(this);
         recyclerView.setAdapter(expensesAdapter);
         expensesAdapter
             .getOnClickSubject()
-            .subscribe(expense -> onExpenseClick(expense));
+            .subscribe(this::onExpenseClick);
     }
+
+    protected abstract ExpensesAdapter createExpensesAdapter(List<? extends BaseExpense> expenses, RecyclerView recyclerView);
+
+    protected abstract int getLayoutResourceId();
 
     protected void onExpenseClick(Expense expense) {}
-
-    public void addExpense(View view) {
-        ((MainActivity) getActivity()).addExpense(view);
-    }
-
-    public RecyclerView getRecyclerView() {
-        return recyclerView;
-    }
 
     @Override
     public void onResume() {
@@ -113,7 +93,4 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         showMessage(getContext(), "onItemClick");
     }
 
-    protected List<Expense> getExpenses() {
-        return expensesAdapter.getExpenses();
-    }
 }

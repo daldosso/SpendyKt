@@ -12,8 +12,6 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
-import static com.adaldosso.spendykt.R.layout.expense;
-
 /**
  *
  * Created by Alberto Dal Dosso on 11/10/2017.
@@ -21,19 +19,21 @@ import static com.adaldosso.spendykt.R.layout.expense;
 
 public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
 
-    private final List<Expense> expenses;
+    private final List<? extends Expense> expenses;
     private ViewGroup parent;
 
     private final PublishSubject<Expense> onClickSubject = PublishSubject.create();
+    private int layoutResourceId;
 
-    public ExpensesAdapter(List<Expense> expenses, ViewGroup parent) {
+    public ExpensesAdapter(List<? extends Expense> expenses, ViewGroup parent, int layoutResourceId) {
         this.expenses = expenses;
         this.parent = parent;
+        this.layoutResourceId = layoutResourceId;
     }
 
     @Override
     public ExpenseHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(expense, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutResourceId, parent, false);
         return new ExpenseHolder(view);
     }
 
@@ -57,7 +57,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
         return 0;
     }
 
-    public List<Expense> getExpenses() {
+    public List<? extends Expense> getExpenses() {
         return expenses;
     }
 

@@ -16,4 +16,7 @@ public interface SpendyService {
     @GET("spendykt-expenses")
     Call<List<Expense>> listExpenses();
 
+    @GET("spendykt-monthly-expenses")
+    Call<List<MonthlyExpense>> listMonthlyExpenses();
+
 }

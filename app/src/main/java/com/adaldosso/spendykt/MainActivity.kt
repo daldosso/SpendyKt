@@ -19,25 +19,25 @@ class MainActivity : SpendyActivity() {
     }
 
     private fun loadStartList() {
-        val expensesListFragment = ExpensesListFragment()
-        expensesListFragment.fillList()
+        val monthlyListFragment = MonthlyListFragment()
+        monthlyListFragment.fillList()
         fragmentManager
             .beginTransaction()
-            .replace(R.id.expenses_list_container, expensesListFragment)
+            .replace(R.id.expenses_list_container, monthlyListFragment)
             .addToBackStack(null)
             .commit()
     }
 
-    fun loadMonthlyOutgoings(year: String, month: String) {
+    fun loadExpenses(year: String, month: String) {
         val params = ArrayList<NameValuePair>(2)
         params.add(NameValuePair(SpendyUtils.MONTH, month))
         params.add(NameValuePair(SpendyUtils.YEAR, year))
-        val monthlyOutgoingFragment = MonthlyListFragment()
-        monthlyOutgoingFragment.fillList()
+        val expensesListFragment = ExpensesListFragment()
+        expensesListFragment.fillList()
         fragmentManager
             .beginTransaction()
-            .setCustomAnimations(R.animator.slide_left_in, R.animator.slide_left_out, R.animator.slide_left_in, R.animator.slide_right_out)
-            .replace(R.id.expenses_list_container, monthlyOutgoingFragment)
+            .setCustomAnimations(R.animator.slide_left_in, R.animator.slide_left_out, R.animator.slide_right_in, R.animator.slide_right_out)
+            .replace(R.id.expenses_list_container, expensesListFragment)
             .addToBackStack(null)
             .commit()
     }

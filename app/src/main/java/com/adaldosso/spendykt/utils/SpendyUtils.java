@@ -1,13 +1,12 @@
 package com.adaldosso.spendykt.utils;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.adaldosso.spendykt.api.Expense;
+import com.adaldosso.spendykt.api.MonthlyExpense;
 import com.adaldosso.spendykt.api.SpendyService;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,17 +26,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * Utils class
+ *
  * Created by Alberto Dal Dosso on 02/10/2017.
  */
 
 public class SpendyUtils {
     public static final String MONTH = "mese";
     public static final String YEAR = "anno";
-    public static final String MONTHLY_OUTGOINGS_URL = "http://www.adaldosso.com/quantospendi/srv/totali-categorie.php";
     private static final String CLASS_TAG = SpendyUtils.class.getSimpleName();
     private static final String BASE_URL = "https://spendynode.herokuapp.com/";
 
-    public static void getRows(@NotNull String url, @NotNull List<NameValuePair> params, Function<List<Expense>, Void> onResponse) {
+    public static void getRows(@NotNull List<NameValuePair> params, Function<List<Expense>, Void> onResponse) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -53,6 +53,27 @@ public class SpendyUtils {
 
             @Override
             public void onFailure(@NonNull Call<List<Expense>> call, @NonNull Throwable t) {
+                Log.e(CLASS_TAG, t.getMessage());
+            }
+        });
+    }
+
+    public static void getMonthlyExpenses(Function<List<MonthlyExpense>, Void> onResponse) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        SpendyService service = retrofit.create(SpendyService.class);
+        Call<List<MonthlyExpense>> monthlyExpenses = service.listMonthlyExpenses();
+        monthlyExpenses.enqueue(new Callback<List<MonthlyExpense>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<MonthlyExpense>> call, @NonNull Response<List<MonthlyExpense>> response) {
+                onResponse.apply(response.body());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<MonthlyExpense>> call, @NonNull Throwable t) {
                 Log.e(CLASS_TAG, t.getMessage());
             }
         });
