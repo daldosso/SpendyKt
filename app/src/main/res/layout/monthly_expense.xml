@@ -7,15 +7,41 @@
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/month"
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/standard_text"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/year"
+        android:textSize="@dimen/standard_text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <TextView
         android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/amount"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textSize="@dimen/standard_text"
         android:layout_marginRight="10dp"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

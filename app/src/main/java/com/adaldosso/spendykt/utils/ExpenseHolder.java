@@ -19,8 +19,8 @@ class ExpenseHolder extends RecyclerView.ViewHolder {
 
     ExpenseHolder(View itemView) {
         super(itemView);
-        year = (TextView) itemView.findViewById(R.id.year);
-        month = (TextView) itemView.findViewById(R.id.month);
+        year = itemView.findViewById(R.id.year);
+        month = itemView.findViewById(R.id.month);
     }
 
     TextView getYear() {

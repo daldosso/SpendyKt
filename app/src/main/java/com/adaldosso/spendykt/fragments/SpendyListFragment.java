@@ -15,8 +15,7 @@ import android.widget.AdapterView;
 
 import com.adaldosso.spendykt.R;
 import com.adaldosso.spendykt.api.BaseExpense;
-import com.adaldosso.spendykt.api.Expense;
-import com.adaldosso.spendykt.utils.ExpensesAdapter;
+import com.adaldosso.spendykt.utils.BaseExpensesAdapter;
 
 import java.util.List;
 
@@ -61,7 +60,7 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
     }
 
     private void setExpenses(List<? extends BaseExpense> expenses) {
-        ExpensesAdapter expensesAdapter = createExpensesAdapter(expenses, recyclerView);
+        BaseExpensesAdapter expensesAdapter = createExpensesAdapter(expenses, recyclerView);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setOnClickListener(this);
@@ -71,11 +70,11 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
             .subscribe(this::onExpenseClick);
     }
 
-    protected abstract ExpensesAdapter createExpensesAdapter(List<? extends BaseExpense> expenses, RecyclerView recyclerView);
+    protected abstract BaseExpensesAdapter createExpensesAdapter(List<? extends BaseExpense> expenses, RecyclerView recyclerView);
 
     protected abstract int getLayoutResourceId();
 
-    protected void onExpenseClick(Expense expense) {}
+    protected void onExpenseClick(BaseExpense expense) {}
 
     @Override
     public void onResume() {

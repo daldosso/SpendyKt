@@ -1,10 +1,10 @@
 package com.adaldosso.spendykt.utils;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.adaldosso.spendykt.api.BaseExpense;
 import com.adaldosso.spendykt.api.Expense;
 
 import java.util.List;
@@ -17,16 +17,17 @@ import io.reactivex.subjects.PublishSubject;
  * Created by Alberto Dal Dosso on 11/10/2017.
  */
 
-public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
+public class ExpensesAdapter extends BaseExpensesAdapter {
 
     private final List<? extends Expense> expenses;
     private ViewGroup parent;
 
-    private final PublishSubject<Expense> onClickSubject = PublishSubject.create();
+    private final PublishSubject<BaseExpense> onClickSubject = PublishSubject.create();
     private int layoutResourceId;
 
-    public ExpensesAdapter(List<? extends Expense> expenses, ViewGroup parent, int layoutResourceId) {
-        this.expenses = expenses;
+    public ExpensesAdapter(List<? extends BaseExpense> expenses, ViewGroup parent, int layoutResourceId) {
+        super(expenses, parent, layoutResourceId);
+        this.expenses = (List<? extends Expense>) expenses;
         this.parent = parent;
         this.layoutResourceId = layoutResourceId;
     }
@@ -45,7 +46,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
         holder.itemView.setOnClickListener(v -> onClickSubject.onNext(expense));
     }
 
-    public Observable<Expense> getPositionClicks(){
+    public Observable<BaseExpense> getPositionClicks(){
         return onClickSubject;
     }
 
@@ -61,7 +62,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpenseHolder> {
         return expenses;
     }
 
-    public PublishSubject<Expense> getOnClickSubject() {
+    public PublishSubject<BaseExpense> getOnClickSubject() {
         return onClickSubject;
     }
 }

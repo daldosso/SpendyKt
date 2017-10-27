@@ -13,14 +13,14 @@ public class BaseExpense {
 
     @SerializedName("year")
     @Expose
-    private String year;
+    public String year;
 
     @SerializedName("month")
     @Expose
-    private String month;
+    public String month;
 
     @SerializedName("amount")
     @Expose
-    private Float amount;
+    public Float amount;
 
 }

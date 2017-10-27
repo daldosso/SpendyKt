@@ -5,19 +5,14 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 
-import com.adaldosso.spendykt.MainActivity;
 import com.adaldosso.spendykt.R;
 import com.adaldosso.spendykt.api.BaseExpense;
-import com.adaldosso.spendykt.api.Expense;
 import com.adaldosso.spendykt.utils.ExpensesAdapter;
 import com.adaldosso.spendykt.utils.NameValuePair;
 import com.adaldosso.spendykt.utils.SpendyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.adaldosso.spendykt.utils.SpendyUtils.extractMonth;
-import static com.adaldosso.spendykt.utils.SpendyUtils.extractYear;
 
 public class ExpensesListFragment extends SpendyListFragment implements AbsListView.OnItemClickListener {
 
@@ -36,7 +31,7 @@ public class ExpensesListFragment extends SpendyListFragment implements AbsListV
 
     @Override
     protected ExpensesAdapter createExpensesAdapter(List<? extends BaseExpense> expenses, RecyclerView recyclerView) {
-        return new ExpensesAdapter((List<? extends Expense>) expenses, recyclerView, getLayoutResourceId());
+        return new ExpensesAdapter(expenses, recyclerView, getLayoutResourceId());
     }
 
     @Override
@@ -46,13 +41,6 @@ public class ExpensesListFragment extends SpendyListFragment implements AbsListV
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    }
-
-    @Override
-    protected void onExpenseClick(Expense expense) {
-        MainActivity activity = (MainActivity) getActivity();
-        String date = expense.getDate();
-        activity.loadExpenses(extractYear(date), extractMonth(date));
     }
 
 }
