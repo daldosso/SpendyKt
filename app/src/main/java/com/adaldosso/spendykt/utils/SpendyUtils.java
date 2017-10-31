@@ -38,12 +38,7 @@ public class SpendyUtils {
     private static final String BASE_URL = "https://spendynode.herokuapp.com/";
 
     public static void getRows(@NotNull List<NameValuePair> params, Function<List<Expense>, Void> onResponse) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        SpendyService service = retrofit.create(SpendyService.class);
+        SpendyService service = getRetrofit().create(SpendyService.class);
         Call<List<Expense>> expenses = service.listExpenses();
         expenses.enqueue(new Callback<List<Expense>>() {
             @Override
@@ -59,12 +54,7 @@ public class SpendyUtils {
     }
 
     public static void getMonthlyExpenses(Function<List<MonthlyExpense>, Void> onResponse) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        SpendyService service = retrofit.create(SpendyService.class);
+        SpendyService service = getRetrofit().create(SpendyService.class);
         Call<List<MonthlyExpense>> monthlyExpenses = service.listMonthlyExpenses();
         monthlyExpenses.enqueue(new Callback<List<MonthlyExpense>>() {
             @Override
@@ -77,6 +67,30 @@ public class SpendyUtils {
                 Log.e(CLASS_TAG, t.getMessage());
             }
         });
+    }
+
+    public static void postExpense(@NotNull Expense expense, Function<List<Expense>, Void> onResponse) {
+        SpendyService service = getRetrofit().create(SpendyService.class);
+        Call<String> expenses = service.postExpense(expense);
+        expenses.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @NonNull
+    private static Retrofit getRetrofit() {
+        return new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
     }
 
     private static String capitalize(String text) {

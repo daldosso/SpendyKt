@@ -2,12 +2,20 @@ package com.adaldosso.spendykt.activities
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.widget.EditText
+import butterknife.BindView
 import com.adaldosso.spendykt.R
 
+
 class AddExpense : AppCompatActivity() {
+
+    @BindView(R.id.editTextDate)
+    var date: EditText? = null
+
+    @BindView(R.id.editTextAmount)
+    var amount: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,9 +24,9 @@ class AddExpense : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        fab.setOnClickListener { view -> {
+//                Expense(date.toString())
+            }
         }
     }
 
