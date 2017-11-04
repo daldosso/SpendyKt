@@ -7,6 +7,11 @@ package com.adaldosso.spendykt.api;
  */
 
 public class MonthlyExpense extends BaseExpense {
+
+    MonthlyExpense(String year) {
+        super(year);
+    }
+
     public String getYear() {
         return year;
     }

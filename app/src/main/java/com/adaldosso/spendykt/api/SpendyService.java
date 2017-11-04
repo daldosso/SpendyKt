@@ -22,6 +22,6 @@ public interface SpendyService {
     Call<List<MonthlyExpense>> listMonthlyExpenses();
 
     @POST("spendykt-expenses")
-    Call<String> postExpense(@Body Expense body);
+    Call<SpendyResponse> postExpense(@Body Expense body);
 
 }

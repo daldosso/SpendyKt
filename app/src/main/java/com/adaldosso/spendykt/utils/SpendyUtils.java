@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.adaldosso.spendykt.api.Expense;
 import com.adaldosso.spendykt.api.MonthlyExpense;
+import com.adaldosso.spendykt.api.SpendyResponse;
 import com.adaldosso.spendykt.api.SpendyService;
 
 import org.jetbrains.annotations.NotNull;
@@ -69,18 +70,19 @@ public class SpendyUtils {
         });
     }
 
-    public static void postExpense(@NotNull Expense expense, Function<List<Expense>, Void> onResponse) {
+    public static void postExpense(@NotNull Expense expense, Function<SpendyResponse, Void> onResponse) {
         SpendyService service = getRetrofit().create(SpendyService.class);
-        Call<String> expenses = service.postExpense(expense);
-        expenses.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+        Call<SpendyResponse> expenses = service.postExpense(expense);
+        expenses.enqueue(new Callback<SpendyResponse>() {
 
+            @Override
+            public void onResponse(Call<SpendyResponse> call, Response<SpendyResponse> response) {
+                Log.i(CLASS_TAG, response.message());
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
+            public void onFailure(Call<SpendyResponse> call, Throwable t) {
+                Log.e(CLASS_TAG, t.getMessage());
             }
         });
     }

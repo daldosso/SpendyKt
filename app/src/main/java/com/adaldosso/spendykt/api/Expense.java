@@ -18,6 +18,10 @@ public class Expense extends BaseExpense {
     @Expose
     private String date;
 
+    public Expense(String year) {
+        super(year);
+    }
+
     public String getYear() {
         return extractYear(date);
     }

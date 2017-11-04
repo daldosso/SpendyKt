@@ -11,6 +11,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseExpense {
 
+    BaseExpense(String year) {
+        this.year = year;
+    }
+
     @SerializedName("year")
     @Expose
     public String year;
