@@ -77,6 +77,7 @@ public class SpendyUtils {
 
             @Override
             public void onResponse(Call<SpendyResponse> call, Response<SpendyResponse> response) {
+                onResponse.apply(response.body());
                 Log.i(CLASS_TAG, response.message());
             }
 
