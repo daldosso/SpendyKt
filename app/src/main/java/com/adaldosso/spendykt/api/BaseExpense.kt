@@ -19,6 +19,8 @@ open class BaseExpense {
     @Expose
     var amount: Float? = null
 
+    @SerializedName("year")
+    @Expose
     open var y: String? = null
 
     constructor(year: String) {

@@ -38,6 +38,7 @@ public class MonthlyExpensesAdapter extends BaseExpensesAdapter {
         MonthlyExpense monthlyExpense = expenses.get(position);
         holder.getYear().setText(monthlyExpense.getYear());
         holder.getMonth().setText(monthlyExpense.getMonth());
+        holder.getAmount().setText(String.valueOf(monthlyExpense.getAmount()));
         holder.itemView.setOnClickListener(v -> onClickSubject.onNext(monthlyExpense));
     }
 

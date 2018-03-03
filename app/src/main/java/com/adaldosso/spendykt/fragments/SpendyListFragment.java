@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -61,8 +60,10 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
 
     private void setExpenses(List<? extends BaseExpense> expenses) {
         BaseExpensesAdapter expensesAdapter = createExpensesAdapter(expenses, recyclerView);
+/*
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+*/
         recyclerView.setOnClickListener(this);
         recyclerView.setAdapter(expensesAdapter);
         expensesAdapter

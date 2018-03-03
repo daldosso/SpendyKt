@@ -1,7 +1,11 @@
 package com.adaldosso.spendykt.fragments;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.TextView;
 
 import com.adaldosso.spendykt.MainActivity;
 import com.adaldosso.spendykt.R;
@@ -14,6 +18,12 @@ import com.adaldosso.spendykt.utils.SpendyUtils;
 import java.util.List;
 
 public class MonthlyListFragment extends SpendyListFragment implements AbsListView.OnItemClickListener {
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((TextView) getActivity().findViewById(R.id.textView)).setText("MonthlyListFragment");
+    }
 
     @Override
     protected int getLayout() {
@@ -42,4 +52,9 @@ public class MonthlyListFragment extends SpendyListFragment implements AbsListVi
         activity.loadExpenses(monthlyExpense.getYear(), monthlyExpense.getMonth());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        fillList();
+    }
 }

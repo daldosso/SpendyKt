@@ -43,6 +43,7 @@ public class ExpensesAdapter extends BaseExpensesAdapter {
         Expense expense = expenses.get(position);
         holder.getYear().setText(expense.getYear());
         holder.getMonth().setText(expense.getMonth());
+        holder.getAmount().setText("TEST");
         holder.itemView.setOnClickListener(v -> onClickSubject.onNext(expense));
     }
 
