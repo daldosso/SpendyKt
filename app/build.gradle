@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.adaldosso.spendy"
         minSdkVersion 24
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 20
         versionName "1.2.20"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -44,7 +44,7 @@ dependencies {
     compile 'net.danlew:android.joda:2.9.9'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testCompile 'junit:junit:4.12'
