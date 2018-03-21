@@ -18,7 +18,7 @@ class ExpensesListFragment : Fragment() {
         val recyclerView = inflater.inflate(R.layout.fragment_item_list, container, false) as RecyclerView?
         recyclerView!!.layoutManager = LinearLayoutManager(recyclerView.context)
         recyclerView.adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener)
-        return view
+        return recyclerView
     }
 
     override fun onAttach(context: Context) {
