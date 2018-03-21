@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.adaldosso.spendykt.activities.AddExpense
+import com.adaldosso.spendykt.fragments.ExpensesListFragment
 import com.adaldosso.spendykt.fragments.MonthlyListFragment
+import com.adaldosso.spendykt.fragments.OnListFragmentInteractionListener
+import com.adaldosso.spendykt.fragments.dummy.DummyContent
 
-class MainActivity : SpendyActivity() {
-
+class MainActivity : SpendyActivity(), OnListFragmentInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,6 +26,10 @@ class MainActivity : SpendyActivity() {
             .commit()
     }
 
+    override fun onListFragmentInteraction(item: DummyContent.DummyItem) {
+
+    }
+
     fun loadExpenses(year: String, month: String) {
 /*
         val params = ArrayList<NameValuePair>(2)
@@ -32,8 +38,9 @@ class MainActivity : SpendyActivity() {
         val expensesListFragment = ExpensesListFragment()
         expensesListFragment.fillList()
 */
-        val expensesListFragment = MonthlyListFragment()
-        expensesListFragment.fillList()
+        val expensesListFragment = ExpensesListFragment()
+//        val expensesListFragment = ItemFragment()
+//        expensesListFragment.fillList()
 
         fragmentManager
             .beginTransaction()
