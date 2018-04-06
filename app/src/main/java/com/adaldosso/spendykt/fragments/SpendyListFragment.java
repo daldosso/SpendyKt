@@ -22,7 +22,7 @@ import static com.adaldosso.spendykt.utils.SpendyUtils.showMessage;
 
 public abstract class SpendyListFragment extends Fragment implements AbsListView.OnItemClickListener, View.OnClickListener {
 
-    private RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -42,7 +42,7 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
                              Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);
         recyclerView = view.findViewById(R.id.expensesList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         return view;
     }
 
@@ -54,7 +54,7 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         setExpenses(expenses);
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
-        getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
+//        getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
         return null;
     }
 
@@ -64,8 +64,10 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 */
-        recyclerView.setOnClickListener(this);
-        recyclerView.setAdapter(expensesAdapter);
+        if (recyclerView != null) {
+            recyclerView.setOnClickListener(this);
+            recyclerView.setAdapter(expensesAdapter);
+        }
         expensesAdapter
             .getOnClickSubject()
             .subscribe(this::onExpenseClick);
