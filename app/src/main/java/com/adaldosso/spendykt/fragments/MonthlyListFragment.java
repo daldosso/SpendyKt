@@ -49,7 +49,9 @@ public class MonthlyListFragment extends SpendyListFragment implements AbsListVi
     protected void onExpenseClick(BaseExpense baseExpense) {
         MonthlyExpense monthlyExpense = (MonthlyExpense) baseExpense;
         MainActivity activity = (MainActivity) getActivity();
-        activity.loadExpenses(monthlyExpense.getYear(), monthlyExpense.getMonth());
+        if (monthlyExpense.getYear() != null && monthlyExpense.getMonth() != null) {
+            activity.loadExpenses(monthlyExpense.getYear(), monthlyExpense.getMonth());
+        }
     }
 
     @Override

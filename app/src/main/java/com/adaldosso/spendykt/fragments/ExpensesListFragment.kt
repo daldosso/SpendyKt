@@ -1,6 +1,5 @@
 package com.adaldosso.spendykt.fragments
 
-import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -9,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adaldosso.spendykt.R
+import com.adaldosso.spendykt.api.BaseExpense
 import com.adaldosso.spendykt.fragments.dummy.DummyContent
+import com.adaldosso.spendykt.utils.BaseExpensesAdapter
+import com.adaldosso.spendykt.utils.ExpensesAdapter
 
-class ExpensesListFragment : Fragment() {
+class ExpensesListFragment : SpendyListFragment() {
     private var mListener: OnListFragmentInteractionListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,7 +38,6 @@ class ExpensesListFragment : Fragment() {
     }
 
 
-/*
     override fun getLayout(): Int {
         return R.layout.fragment_item_list
     }
@@ -45,13 +46,12 @@ class ExpensesListFragment : Fragment() {
     }
 
     override fun createExpensesAdapter(expenses: MutableList<out BaseExpense>?, recyclerView: RecyclerView?): BaseExpensesAdapter {
-        return ExpensesAdapter(expenses, recyclerView, getLayoutResourceId())
+        return ExpensesAdapter(expenses, recyclerView, layoutResourceId)
     }
 
     override fun getLayoutResourceId(): Int {
         return R.layout.expense
     }
-*/
 
 /*
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

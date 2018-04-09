@@ -29,7 +29,9 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout = getActivity().findViewById(R.id.swiperefresh);
-        swipeRefreshLayout.setOnRefreshListener(this::fillList);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setOnRefreshListener(this::fillList);
+        }
     }
 
     @Override
