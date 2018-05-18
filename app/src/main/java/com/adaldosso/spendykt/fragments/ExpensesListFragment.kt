@@ -38,20 +38,15 @@ class ExpensesListFragment : SpendyListFragment() {
     }
 
 
-    override fun getLayout(): Int {
-        return R.layout.fragment_item_list
-    }
+    override fun getLayout(): Int = R.layout.fragment_item_list
 
     override fun fillList() {
     }
 
-    override fun createExpensesAdapter(expenses: MutableList<out BaseExpense>?, recyclerView: RecyclerView?): BaseExpensesAdapter {
-        return ExpensesAdapter(expenses, recyclerView, layoutResourceId)
-    }
+    override fun createExpensesAdapter(expenses: MutableList<out BaseExpense>?, recyclerView: RecyclerView?): BaseExpensesAdapter =
+            ExpensesAdapter(expenses, recyclerView, layoutResourceId)
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.expense
-    }
+    override fun getLayoutResourceId(): Int = R.layout.expense
 
 /*
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
