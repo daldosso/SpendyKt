@@ -12,7 +12,11 @@ import com.adaldosso.spendykt.utils.SpendyUtils.getMonthlyExpenses
 
 class MonthlyListFragment : SpendyListFragment(), AdapterView.OnItemClickListener {
 
-    override fun getLayout(): Int = R.layout.fragment_expenses_list
+    override val layout: Int
+        get() = R.layout.fragment_expenses_list
+
+    override val layoutResourceId: Int
+        get() = R.layout.monthly_expense
 
     override fun fillList() {
         showProgressBar()
@@ -27,13 +31,11 @@ class MonthlyListFragment : SpendyListFragment(), AdapterView.OnItemClickListene
 
     }
 
-    override fun createExpensesAdapter(expenses: List<BaseExpense>, recyclerView: RecyclerView): BaseExpensesAdapter =
-            MonthlyExpensesAdapter(expenses, recyclerView, layoutResourceId)
+    override fun createExpensesAdapter(expenses: List<BaseExpense>, recyclerView: RecyclerView?): BaseExpensesAdapter =
+        MonthlyExpensesAdapter(expenses, recyclerView, layoutResourceId)
 
-    override fun getLayoutResourceId(): Int = R.layout.monthly_expense
-
-    override fun onExpenseClick(baseExpense: BaseExpense) {
-        val monthlyExpense = baseExpense as MonthlyExpense
+    override fun onExpenseClick(expense: BaseExpense) {
+        val monthlyExpense = expense as MonthlyExpense
         val activity = activity as MainActivity
         if (monthlyExpense.getYear() != null && monthlyExpense.month != null) {
             activity.loadExpenses(monthlyExpense.getYear()!!, monthlyExpense.month!!)
