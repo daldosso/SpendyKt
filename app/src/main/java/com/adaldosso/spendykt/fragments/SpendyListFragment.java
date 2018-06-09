@@ -57,8 +57,11 @@ public abstract class SpendyListFragment extends Fragment implements AbsListView
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
 //        getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
+        hideProgressBar();
         return null;
     }
+
+    protected abstract void hideProgressBar();
 
     private void setExpenses(List<? extends BaseExpense> expenses) {
         BaseExpensesAdapter expensesAdapter = createExpensesAdapter(expenses, recyclerView);

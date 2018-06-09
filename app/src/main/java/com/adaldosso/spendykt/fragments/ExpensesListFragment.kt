@@ -14,6 +14,11 @@ import com.adaldosso.spendykt.utils.BaseExpensesAdapter
 import com.adaldosso.spendykt.utils.ExpensesAdapter
 
 class ExpensesListFragment : SpendyListFragment() {
+
+    override fun hideProgressBar() {
+
+    }
+
     private var mListener: OnListFragmentInteractionListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

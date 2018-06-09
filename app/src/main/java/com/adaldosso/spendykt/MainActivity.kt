@@ -16,7 +16,7 @@ class MainActivity : SpendyActivity(), OnListFragmentInteractionListener {
         loadStartList()
     }
 
-    fun loadStartList() {
+    private fun loadStartList() {
         val monthlyListFragment = MonthlyListFragment()
         monthlyListFragment.fillList()
         fragmentManager

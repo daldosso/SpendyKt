@@ -13,7 +13,7 @@
         android:text="@string/month"
         android:layout_alignParentStart="true"
         android:textSize="@dimen/standard_text"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         />
 
     <TextView
@@ -34,7 +34,7 @@
         android:text="@string/amount"
         android:layout_alignParentEnd="true"
         android:textSize="@dimen/standard_text"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         />
 
     <View
