@@ -1,7 +1,10 @@
 package com.adaldosso.spendykt.fragments
 
 import android.support.v7.widget.RecyclerView
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.AdapterView
+import android.widget.ProgressBar
 import com.adaldosso.spendykt.MainActivity
 import com.adaldosso.spendykt.R
 import com.adaldosso.spendykt.api.BaseExpense
@@ -24,11 +27,11 @@ class MonthlyListFragment : SpendyListFragment(), AdapterView.OnItemClickListene
     }
 
     override fun hideProgressBar() {
-
+        activity?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = GONE
     }
 
     private fun showProgressBar() {
-
+        activity?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = VISIBLE
     }
 
     override fun createExpensesAdapter(expenses: List<BaseExpense>, recyclerView: RecyclerView?): BaseExpensesAdapter =

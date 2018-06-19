@@ -7,35 +7,31 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/month"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/month"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/standard_text"
-        android:layout_marginStart="10dp"
-        />
-
-    <TextView
         android:id="@+id/year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:text="@string/year"
-        android:textSize="@dimen/standard_text"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:textSize="@dimen/standard_text" />
 
+    <TextView
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/month"
+        android:textSize="@dimen/standard_text" />
 
     <TextView
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/amount"
         android:layout_alignParentEnd="true"
-        android:textSize="@dimen/standard_text"
-        android:layout_marginEnd="10dp"
-        />
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="19dp"
+        android:text="@string/amount"
+        android:textSize="@dimen/standard_text" />
 
     <View
         android:layout_width="match_parent"
