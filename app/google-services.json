@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1025528453690",
+    "firebase_url": "https://spendykt.firebaseio.com",
+    "project_id": "spendykt",
+    "storage_bucket": "spendykt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025528453690:android:e833262070496345",
+        "android_client_info": {
+          "package_name": "com.adaldosso.spendykt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025528453690-kt0qd85jjipddldchejh4j47050qspul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt9cDbA4vsUIpfcu6CXPSCLALASuaF-FA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
