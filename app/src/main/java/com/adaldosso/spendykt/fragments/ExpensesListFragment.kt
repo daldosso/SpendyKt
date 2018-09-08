@@ -12,6 +12,10 @@ import com.adaldosso.spendykt.api.BaseExpense
 import com.adaldosso.spendykt.fragments.dummy.DummyContent
 import com.adaldosso.spendykt.utils.BaseExpensesAdapter
 import com.adaldosso.spendykt.utils.ExpensesAdapter
+import com.adaldosso.spendykt.utils.NameValuePair
+import com.adaldosso.spendykt.utils.SpendyUtils
+import java.util.*
+
 
 class ExpensesListFragment : SpendyListFragment() {
 
@@ -50,6 +54,21 @@ class ExpensesListFragment : SpendyListFragment() {
 
 
     override fun fillList() {
+
+        val params = ArrayList<NameValuePair>(2)
+        params.add(NameValuePair(SpendyUtils.MONTH, ""))
+        params.add(NameValuePair(SpendyUtils.YEAR, ""))
+//        SpendyUtils.getRows(params, this::fillListCallback);
+//        getMonthlyExpenses(Function<List<MonthlyExpense>, Void> { this.fillListCallback(it) })
+
+/*
+        List<NameValuePair> params = new ArrayList<>(2);
+        params.add(new NameValuePair(SpendyUtils.MONTH, ""));
+        params.add(new NameValuePair(SpendyUtils.YEAR, ""));
+//        SpendyUtils.getRows(params, this::fillListCallback);
+        SpendyUtils.getMonthlyExpenses(this::fillListCallback);
+*/
+
     }
 
     override fun createExpensesAdapter(expenses: List<BaseExpense>, recyclerView: RecyclerView?): BaseExpensesAdapter =

@@ -8,6 +8,9 @@ import com.adaldosso.spendykt.fragments.ExpensesListFragment
 import com.adaldosso.spendykt.fragments.MonthlyListFragment
 import com.adaldosso.spendykt.fragments.OnListFragmentInteractionListener
 import com.adaldosso.spendykt.fragments.dummy.DummyContent
+import com.adaldosso.spendykt.utils.NameValuePair
+import com.adaldosso.spendykt.utils.SpendyUtils
+import java.util.*
 
 class MainActivity : SpendyActivity(), OnListFragmentInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +34,12 @@ class MainActivity : SpendyActivity(), OnListFragmentInteractionListener {
     }
 
     fun loadExpenses(year: String, month: String) {
-/*
         val params = ArrayList<NameValuePair>(2)
         params.add(NameValuePair(SpendyUtils.MONTH, month))
         params.add(NameValuePair(SpendyUtils.YEAR, year))
         val expensesListFragment = ExpensesListFragment()
         expensesListFragment.fillList()
-*/
-        val expensesListFragment = ExpensesListFragment()
+//        val expensesListFragment = ExpensesListFragment()
 //        val expensesListFragment = ItemFragment()
 //        expensesListFragment.fillList()
 
