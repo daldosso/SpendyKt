@@ -1,56 +1,49 @@
-package eu.lbaconsulting.estendoapp.login
+package com.adaldosso.spendykt.login
 
-import android.Manifest.permission.READ_CONTACTS
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.annotation.TargetApi
-import android.app.LoaderManager.LoaderCallbacks
-import android.arch.lifecycle.ViewModelProviders
-import android.content.CursorLoader
-import android.content.Intent
-import android.content.Loader
-import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
-import android.os.AsyncTask
-import android.os.Build
-import android.os.Bundle
-import android.provider.ContactsContract
-import android.support.design.widget.Snackbar
-import android.text.TextUtils
-import android.util.Log
-import android.view.View
-import android.view.View.GONE
-import android.view.inputmethod.EditorInfo
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import com.adaldosso.spendykt.R.id.*
+//import android.arch.lifecycle.ViewModelProviders
+/*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
-import eu.lbaconsulting.core.LBAActivity
-import eu.lbaconsulting.estendoapp.Injection
-import eu.lbaconsulting.estendoapp.R
-import io.reactivex.android.schedulers.AndroidSchedulers
+*/
+//import kotlinx.android.synthetic.main.activity_user.*
+import android.annotation.TargetApi
+import android.app.LoaderManager.LoaderCallbacks
+import android.content.Loader
+import android.database.Cursor
+import android.os.Build
+import android.os.Bundle
+import android.provider.ContactsContract
+import android.support.v7.app.AppCompatActivity
+import com.adaldosso.spendykt.R
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_user.*
-import java.util.*
 
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
+class LoginActivityKt : AppCompatActivity(), LoaderCallbacks<Cursor> {
+    override fun onCreateLoader(p0: Int, p1: Bundle?): Loader<Cursor> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onLoadFinished(p0: Loader<Cursor>?, p1: Cursor?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onLoaderReset(p0: Loader<Cursor>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private var mAuthTask: UserLoginTask? = null
+    private var mAuthTask: LoginActivity.UserLoginTask? = null
 
+/*
     private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: UserViewModel
+*/
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +51,7 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
         setContentView(R.layout.activity_login)
         // Set up the login form.
         populateAutoComplete()
+/*
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 attemptLogin()
@@ -65,10 +59,14 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
             }
             false
         })
+*/
 
+/*
         email_sign_in_button.setOnClickListener { attemptLogin() }
         email_sign_up_button.setOnClickListener { attemptSignUp() }
+*/
 
+/*
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .requestIdToken(getString(R.string.client_id))
@@ -83,15 +81,18 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
 
         setResult(RESULT_OK, Intent())
+*/
     }
 
     override fun onStart() {
         super.onStart()
+/*
         disposable.add(viewModel.userName()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ this.user_name.text = it },
                         { error -> Log.e(TAG, "Unable to get username", error) }))
+*/
 
     }
 
@@ -100,12 +101,14 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
         disposable.clear()
     }
 
-    private lateinit var googleSignInClient: GoogleSignInClient
+//    private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 9001
 
     private fun googleSignIn() {
+/*
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+*/
     }
 
     private fun populateAutoComplete() {
@@ -113,13 +116,14 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
             return
         }
 
-        loaderManager.initLoader(0, null, this)
+//        loaderManager.initLoader(0, null, this)
     }
 
     private fun mayRequestContacts(): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true
         }
+/*
         if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             return true
         }
@@ -130,12 +134,14 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
         } else {
             requestPermissions(arrayOf(READ_CONTACTS), REQUEST_READ_CONTACTS)
         }
+*/
         return false
     }
 
     /**
      * Callback received when a permissions request has been completed.
      */
+/*
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
                                             grantResults: IntArray) {
         if (requestCode == REQUEST_READ_CONTACTS) {
@@ -144,6 +150,7 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
             }
         }
     }
+*/
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -156,10 +163,13 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
         }
 
         // Reset errors.
+/*
         email.error = null
         password.error = null
+*/
 
         // Store values at the time of the login attempt.
+/*
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
 
@@ -172,11 +182,13 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
             focusView = password
             cancel = true
         } else if (!isPasswordValid(passwordStr)) {
+*/
 /*
             password.error = getString(R.string.error_invalid_password)
             focusView = password
             cancel = true
-*/
+*//*
+
         }
 
         // Check for a valid email address.
@@ -198,11 +210,13 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
+*/
 /*
             mAuthTask = UserLoginTask(emailStr, passwordStr)
             mAuthTask!!.execute(null as Void?)
 
-*/
+*//*
+
             disposable.add(viewModel.login(emailStr, passwordStr)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -220,11 +234,13 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
                     }
                 )
             )
+*/
 
         }
     }
 
     private fun attemptSignUp() {
+/*
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
 
@@ -240,6 +256,7 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
                 }
             )
         )
+*/
     }
 
     private fun isEmailValid(email: String): Boolean {
@@ -261,7 +278,7 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+//            val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
 /*
             login_form.visibility = if (show) View.GONE else View.VISIBLE
@@ -275,6 +292,7 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
                     })
 */
 
+/*
             login_progress.visibility = if (show) View.VISIBLE else View.GONE
             login_progress.animate()
                     .setDuration(shortAnimTime)
@@ -284,14 +302,16 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
                             login_progress.visibility = if (show) View.VISIBLE else View.GONE
                         }
                     })
+*/
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-            login_progress.visibility = if (show) View.VISIBLE else View.GONE
+//            login_progress.visibility = if (show) View.VISIBLE else View.GONE
 //            login_form.visibility = if (show) View.GONE else View.VISIBLE
         }
     }
 
+/*
     override fun onCreateLoader(i: Int, bundle: Bundle?): Loader<Cursor> {
         return CursorLoader(this,
                 // Retrieve data rows for the device user's 'profile' contact.
@@ -322,12 +342,15 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
 
     }
 
+*/
     private fun addEmailsToAutoComplete(emailAddressCollection: List<String>) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        val adapter = ArrayAdapter(this@LoginActivity,
+/*
+        val adapter = ArrayAdapter(this@LoginActivityKt,
                 android.R.layout.simple_dropdown_item_1line, emailAddressCollection)
 
         email.setAdapter(adapter)
+*/
     }
 
     object ProfileQuery {
@@ -342,6 +365,7 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
+/*
     inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
@@ -384,17 +408,22 @@ class LoginActivity : LBAActivity(), LoaderCallbacks<Cursor> {
 
     companion object {
 
-        /**
+        */
+/**
          * Id to identity READ_CONTACTS permission request.
-         */
+         *//*
+
         private val REQUEST_READ_CONTACTS = 0
 
-        /**
+        */
+/**
          * A dummy authentication store containing known user names and passwords.
          * TODO: remove after connecting to a real authentication system.
-         */
+         *//*
+
         private val DUMMY_CREDENTIALS = arrayOf("foo@example.com:hello", "bar@example.com:world")
 
         private val TAG = UserActivity::class.java.simpleName
     }
-}
+*/
+//}

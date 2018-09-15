@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.LoginActivityKt" />
         <activity
             android:name=".activities.AddExpense"
             android:label="@string/title_activity_add_expense"

@@ -1,4 +1,4 @@
-package eu.lbaconsulting.estendoapp.persistence
+package com.adaldosso.spendykt.persistence
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room

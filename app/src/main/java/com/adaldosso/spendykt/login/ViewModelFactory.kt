@@ -1,8 +1,8 @@
-package eu.lbaconsulting.estendoapp.login
+package com.adaldosso.spendykt.login
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import eu.lbaconsulting.estendoapp.persistence.UserDao
+import com.adaldosso.spendykt.persistence.UserDao
 
 /**
  * Factory for ViewModels

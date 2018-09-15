@@ -1,9 +1,9 @@
 package com.adaldosso.spendykt
 
 import android.content.Context
-import eu.lbaconsulting.estendoapp.login.ViewModelFactory
-import eu.lbaconsulting.estendoapp.persistence.UserDao
-import eu.lbaconsulting.estendoapp.persistence.UsersDatabase
+import com.adaldosso.spendykt.login.ViewModelFactory
+import com.adaldosso.spendykt.persistence.UserDao
+import com.adaldosso.spendykt.persistence.UsersDatabase
 
 /**
  * Enables injection of data sources.
