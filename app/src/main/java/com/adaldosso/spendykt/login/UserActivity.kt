@@ -1,7 +1,9 @@
 package com.adaldosso.spendykt.login
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.adaldosso.spendykt.Injection
 import com.adaldosso.spendykt.R
 import io.reactivex.disposables.CompositeDisposable
 
@@ -19,10 +21,8 @@ class UserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-/*
         viewModelFactory = Injection.provideViewModelFactory(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
-*/
 //        update_user_button.setOnClickListener { updateUserName() }
     }
 
