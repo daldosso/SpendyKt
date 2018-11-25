@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: android.arch.lifecycle:reactivestreams-1.1.1">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/reactivestreams-1.1.1.aar/9148df2f770cfea275a471168d9085af/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/reactivestreams-1.1.1.aar/9148df2f770cfea275a471168d9085af/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/reactivestreams-1.1.1.aar/c401ace2a5b46e05bb2560c076331cbe/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/reactivestreams-1.1.1.aar/c401ace2a5b46e05bb2560c076331cbe/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

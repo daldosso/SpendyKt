@@ -58,7 +58,7 @@ class ExpensesListFragment : SpendyListFragment() {
         val params = ArrayList<NameValuePair>(2)
         params.add(NameValuePair(SpendyUtils.MONTH, ""))
         params.add(NameValuePair(SpendyUtils.YEAR, ""))
-//        SpendyUtils.getRows(params, this::fillListCallback);
+        SpendyUtils.getRows(params, this::fillListCallback)
 //        getMonthlyExpenses(Function<List<MonthlyExpense>, Void> { this.fillListCallback(it) })
 
 /*

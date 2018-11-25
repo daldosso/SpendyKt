@@ -1,12 +1,14 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support:transition-25.0.1">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/transition-25.0.1.aar/98fbfcaee3db7c45dfbf8a9c20da865f/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/transition-25.0.1.aar/98fbfcaee3db7c45dfbf8a9c20da865f/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/transition-25.0.1.aar/6ceed70f09343ff4d7d66fe94a1b3596/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/transition-25.0.1.aar/6ceed70f09343ff4d7d66fe94a1b3596/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../Android/android-studio/sdk/extras/android/m2repository/com/android/support/transition/25.0.1/transition-25.0.1-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/transition/25.0.1/ba56294963b86cf3425fe338b6b171c5ef7f3f71/transition-25.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Android/android-studio/sdk/extras/android/m2repository/com/android/support/transition/25.0.1/transition-25.0.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
